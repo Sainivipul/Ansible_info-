@@ -1,0 +1,36 @@
+Ping : check connectivity 
+
+ansible [ip-add] -m ping 
+ansible webserver -m ping 
+           webserver is the group in inventory file 
+ansible -i inventory webserver -m ping 
+           inventory is the custom inventory file name 
+
+{IMPORTANT MODULES }
+
+SYNTEX for Adhoc command 
+
+ansible| Hostgroup | Module | argument for Module 
+
+ansible webserver -m yum/shell/user -a"  "
+
+1) ping : check the inventory file host connections 
+ansible mygroup -m ping 
+
+2) setup module : infoprmation of all the host , configuration and information
+ansible webserver -m setup -u username 
+
+3) copy module : when we want to copy a file from remote server to destination nodes 
+ansible mygroup -m copy -a 'src=/home/mypc/docs.txt dest=/temp/user1-data' -u username 
+
+4) yum module : install or remove the pakage 
+ansible mygroup -m yum -a'name=httpd state=present' -become -u username 
+
+5) shell module : use to run unix commands 
+ansible mygroup -m shell -a 'ls-ltr' -u username 
+
+6) service module : start stop reload check status of service 
+ansible hostgroup -m service -a 'name=httpd state=started/stopped/status' -become -u username 
+
+7) debug module : to print a msg on host 
+ansible hostgroup -m debug -a 'msg=Hellow' -u username 
